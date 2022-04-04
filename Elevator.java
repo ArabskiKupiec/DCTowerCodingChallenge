@@ -33,4 +33,8 @@ public interface Elevator extends Runnable {
      */
     int countDistance(int from, int rideDirection);
 
+    /**
+     * Runs our runnable elevator in a thread
+     */
+    void start();
 }

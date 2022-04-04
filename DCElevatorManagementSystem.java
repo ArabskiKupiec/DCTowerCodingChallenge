@@ -6,11 +6,11 @@ public class DCElevatorManagementSystem implements ElevatorManagementSystem {
     final private int DOWN = 2;
     final private int STILL = 0;
     final private int TOO_BIG_VALUE = 1000;
-    private DCElevator[] elevators;
+    private Elevator[] elevators;
 
     public DCElevatorManagementSystem()
     {
-        elevators = new DCElevator[7];
+        elevators = new Elevator[7];
         for (int i = 0; i < 7; i++) {
             elevators[i] = new DCElevator();
         }
@@ -18,7 +18,7 @@ public class DCElevatorManagementSystem implements ElevatorManagementSystem {
 
     public synchronized void addRequest(int from, int to) throws IllegalArgumentException
     {
-        DCElevator chosen;
+        Elevator chosen;
         if(from > 54 || from < 0 || to == from || to > 55 || to < 0)
         {
             throw new IllegalArgumentException("invalid ride parameters provided, please try again with proper ones");
@@ -36,7 +36,7 @@ public class DCElevatorManagementSystem implements ElevatorManagementSystem {
      * @param to the station where the ride is supposed to end
      * @return elevator that was found suitable for a given ride-job
      **/
-    private synchronized DCElevator findASuitableElevator(int from, int to)
+    private synchronized Elevator findASuitableElevator(int from, int to)
     {
         int minimalDistance = TOO_BIG_VALUE;
         int currentDistance = TOO_BIG_VALUE;
@@ -65,7 +65,10 @@ public class DCElevatorManagementSystem implements ElevatorManagementSystem {
         return elevators[chosenElevatorNumber];
     }
 
-    // the elevators management system is running
+
+    /**
+     * Runs the elevator management system
+     * **/
     @Override
     public synchronized void run() {
         for (int i = 0; i < 7; i++) {
